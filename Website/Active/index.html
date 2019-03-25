@@ -43,6 +43,28 @@
         background-color: var(--color-primary-0);
       }
 
+      #navbuttons {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3em;
+        background-color: white;
+      }
+
+      #navbuttons ul {
+        list-style-type: none;
+
+      }
+
+      #navbuttons ul li {
+        display: inline;
+        border: 1 1 black;
+      }
+
+      #navbuttons a {
+      }
+
       #header h1 {
         margin: .2em 1em;
         font-family: "Segoe UI", "Arial", "sans-serif";
@@ -50,7 +72,7 @@
       }
 
       .custom-zoom{
-        bottom: 1.3em;
+        bottom: 2em;
         right: .5em;
         background: none;
       }
@@ -77,6 +99,16 @@
 
 <body>
   <div id="header"><h1>Active</h1></div>
+
+  <div id="navbuttons">
+    <ul>
+      <a href=""><li>Record</li></a>
+      <a href=""><li>Navigation</li></a>
+      <a href=""><li>Report</li></a>
+      <a href=""><li>Layers</li></a>
+      <a href=""><li>Search</li></a>
+    </ul>
+  </div>
   
   <div id="map" class="map"></div>
   <script type="text/javascript">

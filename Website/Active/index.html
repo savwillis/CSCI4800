@@ -2,9 +2,14 @@
 <html lang="en">
 
 <head>
+	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css"
 	      type="text/css">
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
 	<style>
 		:root {
 			--color-primary-0: #2DAA0C; /* Main Primary color */
@@ -51,62 +56,36 @@
 		}
 
 		#content {
-			width: 100%;
-			height: 100%;
-			margin: 0;
-			padding: 0;
-			position: absolute;
-			top: 0;
-			left: 0;
 		}
 
-		#navbuttons {
+		#navbuttons_flex a i {
+			font-size: 1em;
+		}
+
+		#navbuttons_flex {
+			display: flex;
+			flex-direction: row;
+			background-color: white;
+			flex-wrap: nowrap;
+			justify-content: center;
+			align-content: stretch;
+			align-items: stretch;
 			position: absolute;
 			bottom: 0;
-			left: 0;
 			width: 100%;
-			height: 3em;
-			background-color: white;
 		}
 
-		#navbuttons ul {
-			list-style-type: none;
-			padding: 0;
-			margin: 0;
-			overflow: hidden;
-			height: 100%;
-		}
-
-		#navbuttons ul li {
-			display: inline;
-			margin: 0;
-			height: 100%;
-			width: 4.6em;
-			float: left;
-			border-style: solid none solid solid;
-			border-width: 1px;
-			border-color: gray;
-		}
-
-		#navbuttons a:hover {
-			background-color: #eee;
-			/*color: #eee;*/
-		}
-
-		#navbuttons a {
-			display: block;
+		#navbuttons_flex a {
+			min-width: 3em;
+			flex: 1 1 auto;
+			align-self: auto;
 			text-align: center;
-			padding: 10px;
-			margin: 0;
-			height: 100%;
-			text-decoration: none;
-			color: #333;
-			font-size: .7em;
-
+			color: #222;
+			padding: .5em;
 		}
 
-		#navbuttons a i {
-			font-size: 1.6em;
+		#navbuttons_flex a:hover {
+			background-color: #ddd;
 		}
 
 		#header h1 {
@@ -118,7 +97,16 @@
 			width: 100%;
 			padding: 0;
 			position: absolute;
-			bottom: 3em;
+			bottom: 4em;
+		}
+
+		.collection {
+			width: 50%;
+			margin: 0 auto;
+		}
+
+		.collection a.collection-item {
+			color:#222;
 		}
 
 		.small_vertical_menu a {
@@ -156,7 +144,7 @@
 		}
 
 		.custom-zoom {
-			bottom: 3.3em;
+			bottom: 4em;
 			right: .5em;
 			background: none;
 		}
@@ -181,6 +169,17 @@
 			background-color: rgba(40, 40, 40, .7);
 		}
 
+		.zoom_controls {
+			position:fixed;
+			right:0;
+			bottom:4em;
+		}
+
+		.fixed-action-btn {
+			position:relative;
+		}
+
+
 	</style>
 
 	<meta name="theme-color" content="#166900">
@@ -195,86 +194,170 @@
 <div id="header"><h1>Active</h1></div>
 
 <div id="content">
-	<div id="navbuttons">
-		<ul>
-			<li><a onclick="record_menu_toggle()"><i class="fas fa-circle"></i><br>Record</a></li>
-			<li><a href=""><i class="fas fa-level-down-alt"></i><br>Navigation</a></li>
-			<li><a href=""><i class="fas fa-exclamation-circle"></i><br>Report</a></li>
-			<li><a onclick="layers_menu_toggle()"><i class="fas fa-layer-group"></i><br>Layers</a></li>
-			<li><a href=""><i class="fas fa-search"></i><br>Search</a></li>
-		</ul>
+
+	<div id="navbuttons_flex">
+		<a href="#!" onclick="record_menu_toggle()">
+			<div><i class="fas fa-circle"></i><br>Record</div>
+		</a>
+		<a href="#!">
+			<div><i class="fas fa-level-down-alt"></i><br>Navigation</div>
+		</a>
+		<a href="#!">
+			<div><i class="fas fa-exclamation-circle"></i><br>Report</div>
+		</a>
+		<a href="#!" onclick="layers_menu_toggle()">
+			<div><i class="fas fa-layer-group"></i><br>Layers</div>
+		</a>
+		<a href="#!">
+			<div><i class="fas fa-search"></i><br>Search</div>
+		</a>
 	</div>
 
 	<div id="record_menu" class="small_popup_menu">
-		<ul class="small_vertical_menu">
-			<li><a href="">Start</a></li>
-			<li><a href="">Pause</a></li>
-			<li><a href="">Stop</a></li>
-		</ul>
+		<div class="collection">
+			<a href="#!" class="collection-item">Start</a>
+			<a href="#!" class="collection-item">Pause</a>
+			<a href="#!" class="collection-item">Stop</a>
+		</div>
 	</div>
 
 	<div id="layers_menu" class="small_popup_menu">
-		<ul class="small_vertical_menu">
-			<li><a href="">Standard</a></li>
-			<li><a href="">Terrain</a></li>
-			<li><a href="">Satellite</a></li>
-		</ul>
+		<div class="collection">
+			<a href="#!" class="collection-item">Standard</a>
+			<a href="#!" class="collection-item">Terrain</a>
+			<a href="#!" class="collection-item">Satellite</a>
+		</div>
 	</div>
-</div>
 
-<div id="map" class="map"></div>
-<script type="text/javascript">
-	var map = new ol.Map({
-		target: 'map',
-		controls: [],
-		layers: [
-			new ol.layer.Tile({
-				source: new ol.source.OSM()
-			})
-		],
-		view: new ol.View({
+	<div class="zoom_controls">
+		<div class="fixed-action-btn">
+			<a class="btn-floating btn-large green" onclick="findgps()">
+				<i class="material-icons">location_searching</i>
+			</a>
+		</div>
+		<div class="fixed-action-btn">
+			<a class="btn-floating btn-large green" onclick="zoom(1)">
+				<span style="font-size:2em;">+</span>
+			</a>
+		</div>
+		<div class="fixed-action-btn">
+			<a class="btn-floating btn-large green" onclick="zoom(-1)">
+				<span style="font-size:2em;">-</span>
+			</a>
+		</div>
+	</div>
+
+
+	<div id="map" class="map"></div>
+	<script>
+
+		var view = new ol.View({
 			center: ol.proj.fromLonLat([-83.385, 33.902]),
 			zoom: 17
-		})
-	});
+		});
+		var map = new ol.Map({
+			target: 'map',
+			controls: [],
+			layers: [
+				new ol.layer.Tile({
+					source: new ol.source.OSM()
+				})
+			],
+			view: view
+		});
 
-	map.addControl(new ol.control.Zoom({
-		className: 'custom-zoom'
-	}));
+		var geolocation = new ol.Geolocation({
+			// enableHighAccuracy must be set to true to have the heading value.
+			trackingOptions: {
+				enableHighAccuracy: true
+			},
+			projection: view.getProjection()
+		});
 
+		// handle geolocation error.
+		geolocation.on('error', function (error) {
+			var info = document.getElementById('info');
+			info.innerHTML = error.message;
+			info.style.display = '';
+		});
 
-	var record_menu_visible = false;
+		var accuracyFeature = new ol.Feature();
+		geolocation.on('change:accuracyGeometry', function () {
+			accuracyFeature.setGeometry(geolocation.getAccuracyGeometry());
+		});
 
-	function record_menu_toggle() {
-		if (layers_menu_visible) {
-			layers_menu_toggle();
+		var positionFeature = new ol.Feature();
+		positionFeature.setStyle(new ol.style.Style({
+			image: new ol.style.Circle({
+				radius: 6,
+				fill: new ol.style.Fill({
+					color: '#3399CC'
+				}),
+				stroke: new ol.style.Stroke({
+					color: '#fff',
+					width: 2
+				})
+			})
+		}));
+
+		geolocation.on('change:position', function () {
+			var coordinates = geolocation.getPosition();
+			positionFeature.setGeometry(coordinates ?
+				new ol.geom.Point(coordinates) : null);
+		});
+
+		new ol.layer.Vector({
+			map: map,
+			source: new ol.source.Vector({
+				features: [accuracyFeature, positionFeature]
+			})
+		});
+
+		function findgps() {
+			geolocation.setTracking(true);
 		}
-		if (record_menu_visible) {
-			document.getElementById("record_menu").style.display = "none"
-			record_menu_visible = false;
-		} else {
-			document.getElementById("record_menu").style.display = "block"
-			record_menu_visible = true;
+
+
+		var record_menu_visible = false;
+
+		function record_menu_toggle() {
+			if (layers_menu_visible) {
+				layers_menu_toggle();
+			}
+			if (record_menu_visible) {
+				document.getElementById("record_menu").style.display = "none"
+				record_menu_visible = false;
+			} else {
+				document.getElementById("record_menu").style.display = "block"
+				record_menu_visible = true;
+			}
 		}
-	}
 
-	var layers_menu_visible = false;
+		var layers_menu_visible = false;
 
-	function layers_menu_toggle() {
-		if (record_menu_visible) {
-			record_menu_toggle();
+		function layers_menu_toggle() {
+			if (record_menu_visible) {
+				record_menu_toggle();
+			}
+			if (layers_menu_visible) {
+				document.getElementById("layers_menu").style.display = "none"
+				layers_menu_visible = false;
+			} else {
+				document.getElementById("layers_menu").style.display = "block"
+				layers_menu_visible = true;
+			}
 		}
-		if (layers_menu_visible) {
-			document.getElementById("layers_menu").style.display = "none"
-			layers_menu_visible = false;
-		} else {
-			document.getElementById("layers_menu").style.display = "block"
-			layers_menu_visible = true;
+
+		function zoom(value) {
+			view.animate({
+				zoom: view.getZoom() + value,
+				duration: 200
+			});
+			//map.getView().setZoom(map.getView().getZoom() + value);
 		}
-	}
 
 
-</script>
+	</script>
 </body>
 
 </html>

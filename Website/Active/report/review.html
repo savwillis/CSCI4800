@@ -29,16 +29,18 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
 	      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	<title>Active</title>
+
+
 </head>
 
 <body>
-<div id="header"><h1>Active | Obstruction</h1></div>
+<div id="header"><h1>Active | Review</h1></div>
 
 <div id="content">
 
 	<nav>
 		<div class="nav-wrapper green">
-			<a href="#" class="brand-logo center">Obstruction</a>
+			<a href="#" class="brand-logo center">Review</a>
 			<ul id="nav-mobile" class="left">
 				<li><a href="../index.html"><i class="material-icons">arrow_back</i></a></li>
 			</ul>
@@ -47,33 +49,25 @@
 
 	<form class="report_form">
 		<div>
-			<h6 class="center">Type of Obstruction</h6>
-			<div class="input-field">
-				<select>
-					<option value="" disabled selected>Choose obstruction type</option>
-					<option value="1">Fallen tree, vegetation</option>
-					<option value="2">Washed out section</option>
-					<option value="3">Construction</option>
-					<option value="4">think of more plz?</option>
-				</select>
-			</div>
-			<div class="input-field">
-				<input id="obstruction_other" type="text">
-				<label for="obstruction_other">Other</label>
-			</div>
+			<h6 class="center">Find Trail</h6>
+			<a href="../index.html" class="btn waves-effect waves-light green">Search
+				<i class="material-icons">search</i>
+			</a>
+			<a href="../index.html" class="btn waves-effect waves-light green">Map
+				<i class="material-icons">location_searching</i>
+			</a>
 		</div>
 
 		<br><div class="divider"></div><br>
 
 		<div>
-			<h6 class="center">How navigable is the obstruction?</h6>
-			<div class="input-field">
-				<select>
-					<option value="" disabled selected>Choose difficulty</option>
-					<option value="1">Not at all - find a different way.</option>
-					<option value="2">Difficult - more equipment needed.</option>
-					<option value="3">Easy - just walk around it.</option>
-				</select>
+			<h6 class="center">Rating</h6>
+			<div class="stars center">
+				<i class="material-icons">star_border</i>
+				<i class="material-icons">star_border</i>
+				<i class="material-icons">star_border</i>
+				<i class="material-icons">star_border</i>
+				<i class="material-icons">star_border</i>
 			</div>
 		</div>
 
@@ -83,16 +77,18 @@
 			<h6 class="center">Additional Comments</h6>
 			<div class="input-field">
 				<textarea id="review_text" class="materialize-textarea"></textarea>
-				<label for="review_text">Type a brief description.</label>
+				<label for="review_text">Type review here.</label>
 			</div>
 		</div>
 
+		<br><div class="divider"></div><br>
+
 		<div>
 			<h6 class="center">Add Photo</h6>
-			<a href="../index.html" class="btn waves-effect green" >
+			<a href="../index.html" class="btn waves-effect green">
 				<i class="material-icons">file_upload</i>
 			</a>
-			<a href="../index.html" class="btn waves-effect green" >
+			<a href="../index.html" class="btn waves-effect green">
 				<i class="material-icons">camera_alt</i>
 			</a>
 		</div>
@@ -108,14 +104,16 @@
 	</form>
 </div>
 
+
 <script type="text/javascript" src="../js/materialize.min.js"></script>
 
 <script>
-	document.addEventListener('DOMContentLoaded', function() {
-		//var options = {"test1", "test2"};
+	document.addEventListener('DOMContentLoaded', function () {
 		var elems = document.querySelectorAll('select');
 		var instances = M.FormSelect.init(elems);
 	});
+
+
 	// FULLSCREEN
 	/*
 	window.addEventListener("load", function () {

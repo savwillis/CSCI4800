@@ -123,6 +123,7 @@ body {
 	display:none;
 }
 
+
 #report_menu {
 	display: none;
 	position: absolute;
@@ -141,6 +142,15 @@ body {
 
 #report_menu a {
 	color:black;
+}
+
+.popup_menu {
+	transition: 1s bottom;
+	height:100%;
+	width:100%;
+	margin:0;
+	padding:0;
+	overflow: hidden;
 }
 
 .search_bar {

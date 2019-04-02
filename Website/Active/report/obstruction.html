@@ -227,7 +227,7 @@
 		}
 
 		.list_header h4 {
-			margin:.1;
+			margin:.1f;
 		}
 
 
@@ -306,11 +306,10 @@
 	<div id="report_menu">
 		<div class="list_header"><h4>Report</h4></div>
 		<div class="divider"></div>
-		<a href="report/obstruction.html"><div class="section">
+		<div class="section" href="#!">
 		  <h5>Obstruction</h5>
 		  <p>Fallen tree, construction...</p>
 		</div>
-		</a>
 		<div class="divider"></div>
 		<div class="section">
 		  <h5>Detour</h5>
@@ -352,71 +351,7 @@
 	</div>
 
 
-	<div id="map" class="map"></div>
 	<script>
-
-		var view = new ol.View({
-			center: ol.proj.fromLonLat([-83.385, 33.902]),
-			zoom: 17
-		});
-		var map = new ol.Map({
-			target: 'map',
-			controls: [],
-			layers: [
-				new ol.layer.Tile({
-					source: new ol.source.OSM()
-				})
-			],
-			view: view
-		});
-
-		var geolocation = new ol.Geolocation({
-			// enableHighAccuracy must be set to true to have the heading value.
-			trackingOptions: {
-				enableHighAccuracy: true
-			},
-			projection: view.getProjection()
-		});
-
-		// handle geolocation error.
-		geolocation.on('error', function (error) {
-			var info = document.getElementById('info');
-			info.innerHTML = error.message;
-			info.style.display = '';
-		});
-
-		var accuracyFeature = new ol.Feature();
-		geolocation.on('change:accuracyGeometry', function () {
-			accuracyFeature.setGeometry(geolocation.getAccuracyGeometry());
-		});
-
-		var positionFeature = new ol.Feature();
-		positionFeature.setStyle(new ol.style.Style({
-			image: new ol.style.Circle({
-				radius: 6,
-				fill: new ol.style.Fill({
-					color: '#3399CC'
-				}),
-				stroke: new ol.style.Stroke({
-					color: '#fff',
-					width: 2
-				})
-			})
-		}));
-
-		geolocation.on('change:position', function () {
-			var coordinates = geolocation.getPosition();
-			positionFeature.setGeometry(coordinates ?
-				new ol.geom.Point(coordinates) : null);
-		});
-
-		new ol.layer.Vector({
-			map: map,
-			source: new ol.source.Vector({
-				features: [accuracyFeature, positionFeature]
-			})
-		});
-
 		// FULLSCREEN
 		window.addEventListener("load", function() { window. scrollTo(0, 0); });
 		document.addEventListener("touchmove", function(e) { e.preventDefault() });
@@ -431,74 +366,6 @@
 		body.msrequestFullscreen();
 		}
 
-		function findgps() {
-			geolocation.setTracking(true);
-		}
-
-		var current_screen = -1;
-		var popup_screens = [];
-
-		popup_screens.push(document.getElementById("record_menu"));
-		popup_screens.push(document.getElementById("navigation_menu"));
-		popup_screens.push(document.getElementById("report_menu"));
-		popup_screens.push(document.getElementById("layers_menu"));
-		popup_screens.push(document.getElementById("search_menu"));
-
-		function toggle_screen(id) {
-			for (var i = 0; i< popup_screens.length; i++) {
-				if (i == id) {
-					
-					if (id == current_screen) {
-						popup_screens[i].style.display = "none";
-						current_screen = -1;
-					} else {
-						popup_screens[i].style.display = "block";
-						current_screen = id;
-					}
-				} else {
-					popup_screens[i].style.display = "none";
-				}
-			}
-		}
-
-
-		var record_menu_visible = false;
-
-		function record_menu_toggle() {
-			if (layers_menu_visible) {
-				layers_menu_toggle();
-			}
-			if (record_menu_visible) {
-				document.getElementById("record_menu").style.display = "none"
-				record_menu_visible = false;
-			} else {
-				document.getElementById("record_menu").style.display = "block"
-				record_menu_visible = true;
-			}
-		}
-
-		var layers_menu_visible = false;
-
-		function layers_menu_toggle() {
-			if (record_menu_visible) {
-				record_menu_toggle();
-			}
-			if (layers_menu_visible) {
-				document.getElementById("layers_menu").style.display = "none"
-				layers_menu_visible = false;
-			} else {
-				document.getElementById("layers_menu").style.display = "block"
-				layers_menu_visible = true;
-			}
-		}
-
-		function zoom(value) {
-			view.animate({
-				zoom: view.getZoom() + value,
-				duration: 200
-			});
-			//map.getView().setZoom(map.getView().getZoom() + value);
-		}
 
 
 	</script>

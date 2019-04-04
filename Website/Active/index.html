@@ -31,7 +31,7 @@
 	<title>Active</title>
 </head>
 
-<body>
+<body style="overflow: hidden">
 <div id="header"><h1>Active</h1></div>
 
 <div id="content">
@@ -58,17 +58,17 @@
 
 	<div id="record_menu" class="small_popup_menu">
 		<div class="collection">
-			<a href="#!" class="collection-item">Start</a>
-			<a href="#!" class="collection-item">Pause</a>
-			<a href="#!" class="collection-item">Stop</a>
+			<a href="#!" onclick="toggle_screen(0)" class="collection-item">Start</a>
+			<a href="#!" onclick="toggle_screen(0)" class="collection-item">Pause</a>
+			<a href="#!" onclick="toggle_screen(0)" class="collection-item">Stop</a>
 		</div>
 	</div>
 
 	<div id="layers_menu" class="small_popup_menu">
 		<div class="collection">
-			<a href="#!" class="collection-item">Standard</a>
-			<a href="#!" class="collection-item">Terrain</a>
-			<a href="#!" class="collection-item">Satellite</a>
+			<a href="#!" onclick="toggle_screen(3)" class="collection-item">Standard</a>
+			<a href="#!" onclick="toggle_screen(3)" class="collection-item">Terrain</a>
+			<a href="#!" onclick="toggle_screen(3)" class="collection-item">Satellite</a>
 		</div>
 	</div>
 
@@ -77,7 +77,7 @@
 		<div class="input-field">
 			<input placeholder="Search" type="text">
 		</div>
-		<button class="btn waves-effect green" type="submit" name="action">Search
+		<button onclick="toggle_screen(4)" class="btn waves-effect green right" type="submit" name="action">Search
 			<i class="material-icons right">search</i>
 		</button>
 	</div>
@@ -90,7 +90,7 @@
 		<div class="input-field">
 				<input placeholder="Directions To" type="text">
 		</div>
-		<button class="btn waves-effect green" type="submit" name="action">Search
+		<button onclick="toggle_screen(1)" class="btn waves-effect green right" type="submit" name="action">Search
 			<i class="material-icons right">send</i>
 		</button>
 	</div>
@@ -247,20 +247,35 @@
 		function toggle_screen(id) {
 			var zoom_at_top = false;
 			for (let i = 0; i < popup_screens.length; i++) {
+				// show all screens - for 'bottom'
+				popup_screens[i].style.display = "block";
+				// if the clicked screen
 				if (i == id) {
-
 					if (id == current_screen) {
-						popup_screens[i].style.display = "none";
+						//popup_screens[i].style.display = "none";
+						popup_screens[i].style.bottom = "-20em";
 						current_screen = -1;
+						if (i==2) {
+							popup_screens[i].style.bottom = "-100em";
+						}
 					} else {
-						popup_screens[i].style.display = "block";
-						if (id == 4 || id == 1) {
+						//popup_screens[i].style.display = "block";
+						popup_screens[i].style.bottom = "4em";
+						if (i == 4 || i == 1) {
 							zoom_at_top = true;
+						}
+
+						if (i==2) {
+							popup_screens[i].style.bottom = "0em";
 						}
 						current_screen = id;
 					}
 				} else {
-					popup_screens[i].style.display = "none";
+					//popup_screens[i].style.display = "none";
+					popup_screens[i].style.bottom = "-20em";
+					if (i==2) {
+						popup_screens[i].style.bottom = "-100em";
+					}
 				}
 			}
 			if (zoom_at_top) {

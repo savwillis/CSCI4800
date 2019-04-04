@@ -107,25 +107,25 @@ body {
 	background-color: #ccc;
 }
 
-#record_menu {
-	display: none;
-}
+/*#record_menu {*/
+/*	display: none;*/
+/*}*/
 
-#layers_menu {
-	display: none;
-}
+/*#layers_menu {*/
+/*	display: none;*/
+/*}*/
 
-#search_menu {
-	display:none;
-}
+/*#search_menu {*/
+/*	display:none;*/
+/*}*/
 
-#navigation_menu {
-	display:none;
-}
+/*#navigation_menu {*/
+/*	display:none;*/
+/*}*/
 
 
 #report_menu {
-	display: none;
+	/*display: none;*/
 	position: absolute;
 	width:100%;
 	height:100%;
@@ -145,12 +145,15 @@ body {
 }
 
 .popup_menu {
-	transition: 1s bottom;
 	height:100%;
 	width:100%;
 	margin:0;
 	padding:0;
 	overflow: hidden;
+}
+
+#popup_screens div {
+	transition: bottom 1s;
 }
 
 .search_bar {
@@ -181,6 +184,10 @@ body {
 	bottom: 4em;
 	right: .5em;
 	background: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .custom-zoom:hover {
@@ -218,7 +225,7 @@ body {
 }
 
 .list_header h4 {
-	margin: .1;
+	margin: .1em;
 }
 
 .report_form {
@@ -232,4 +239,8 @@ body {
 }
 #review_text {
 	height: 5em;
+}
+
+.input-field ::placeholder {
+	color:black;
 }

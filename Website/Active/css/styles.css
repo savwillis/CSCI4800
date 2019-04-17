@@ -107,25 +107,39 @@ body {
 	background-color: #ccc;
 }
 
-/*#record_menu {*/
-/*	display: none;*/
-/*}*/
+#record_menu {
+	/* display: none; */
+	bottom: -20em;
+}
 
-/*#layers_menu {*/
-/*	display: none;*/
-/*}*/
+#layers_menu {
+	/* display: none; */
+	bottom: -20em;
+}
 
-/*#search_menu {*/
-/*	display:none;*/
-/*}*/
+#search_menu {
+	/* display:none; */
+	bottom: -20em;
+}
 
-/*#navigation_menu {*/
-/*	display:none;*/
-/*}*/
+#navigation_menu {
+	/* display:none; */
+	bottom: -20em;
+}
 
+
+#profile {
+	position: absolute;
+	top:0em;
+	left: 1em;
+	z-index: 0;
+	width:1em;
+	height:1em;
+}
 
 #report_menu {
 	/*display: none;*/
+	bottom: -100em;
 	position: absolute;
 	width:100%;
 	height:100%;
